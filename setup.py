@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'kivyoav',
   packages = ['kivyoav'], # this must be the same as the name above
-  version = '0.1',
+  version = '0.2',
   description = 'A set of kivy utils and widgets',
   author = 'Yoav Glazner',
   author_email = 'yoavglazner@gmail.com',
