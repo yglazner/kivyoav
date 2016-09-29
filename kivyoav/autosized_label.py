@@ -22,7 +22,6 @@ class AutoSizedLabel(Label):
         
         
     def _calc_font_size(self):
-        print(self.size, self.texture_size)
 
         if [self.size, self.texture_size] == self.old_stuff:
             return self.font_size
