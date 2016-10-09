@@ -1,0 +1,8 @@
+remember to update the version in setup.py
+git commit 
+git push
+git tag 0.x -m "some message"
+git push --tags origin master
+py -3.4 setup.py sdist upload -r pypi
+
+
