@@ -18,6 +18,7 @@ class AutoSizedLabel(Label):
     
     def __init__(self, **kw):
         self.old_stuff = []
+        self.co_list = list()
         super().__init__(**kw)
         
         
@@ -28,21 +29,30 @@ class AutoSizedLabel(Label):
         if self.text == "":
             return self.font_size
         self.old_stuff = list(self.size), list(self.texture_size)
-        self._make_adjustments()
+        id_ = object()
+        self.co_list.append(id_)
+        self._make_adjustments(id_=id_)
         return self.font_size
 
-    def _make_adjustments(self, growing=True):
+    def _make_adjustments(self, id_, growing=True):
+        if self.co_list[0]!=id_:
+            self.co_list.remove(id_)
+            return
         w, h = self.size
         wt, ht = self.texture_size
         w = int(w*self.ratio)
         h = int(h*self.ratio)
         if w < wt or h < ht:
-            self.font_size -= 0.2
+            self.font_size -= 1
             growing = False
         elif growing:
             self.font_size += 1
-        
-        Clock.schedule_once(lambda dt: self._make_adjustments(growing=growing))
+        else:
+            self.co_list.remove(id_)
+            return
+       
+        Clock.schedule_once(lambda dt: self._make_adjustments(id_=id_, 
+                                                              growing=growing))
            
         
             
@@ -50,6 +60,6 @@ class AutoSizedLabel(Label):
 if __name__ == '__main__':
     class _TestApp(App):
         def build(self):
-            return AutoSizedLabel(text="crazy\ncheese")
+            return AutoSizedLabel(text="crazy\ncheese", ratio=0.5)
 
     _TestApp().run()
