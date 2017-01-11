@@ -8,7 +8,7 @@ from kivy.properties import NumericProperty
 
 Builder.load_string("""
 <AutoSizedLabel>:
-    font_size: [self._calc_font_size(), self.size, self.ratio][0]
+    font_size: [self._calc_font_size(), self.size, self.ratio, self.text][0]
     ratio: 0.5
 """)
 
